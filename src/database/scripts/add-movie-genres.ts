@@ -12,7 +12,8 @@ async function insertMovieGenres() {
     { genre: 'Mystery' },
     { genre: 'Romance' },
     { genre: 'Thriller' },
-    { genre: 'Western' }
+    { genre: 'Western' },
+    { genre: 'Anime' }
   ]);
   console.log('Movie genres inserted');
 }
