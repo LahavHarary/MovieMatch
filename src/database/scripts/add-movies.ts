@@ -1,8 +1,9 @@
-import { connect } from '../db';
+import { connect, disconnect } from '../db';
 
 async function insertMovies() {
   const db = await connect();
   const collection = db.collection('movies');
+  console.log("Starting to insert movies");
   await collection.insertMany(
     [
         { "movie_name": "The Great Adventure", "genres": ["Action", "Adventure"] },
@@ -47,6 +48,7 @@ async function insertMovies() {
       ]    
   );
   console.log('Movie genres inserted');
+  disconnect();
 }
 
 insertMovies().catch(console.error);
