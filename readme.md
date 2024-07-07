@@ -48,7 +48,7 @@ Make sure you have the following installed:
 
 4. Start the MongoDB server:
     ```sh
-    mongod
+    mongod --dbpath ~/mongodb/data/db
     ```
 
 ### Running the Project Locally

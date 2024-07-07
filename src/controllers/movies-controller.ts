@@ -15,7 +15,6 @@ export const getMoviesAccordingToGenre = async (req: Request, res: Response) => 
         const collection = db.collection('movies');
         const movies = await collection.find(
             { genres: { $in: [genre] } },
-             { projection: { _id: 0, movie_name: 1, genres: 1 } }
              ).toArray();
 
         return res.status(200).json(movies);
@@ -33,10 +32,12 @@ export const getAllMovies =async (req:Request, res: Response) => {
         const collection = db.collection('movies');
         const movies = await collection.find(
             {},
-            { projection: { _id: 0, movie_name: 1, genres: 1 } }
+            //{ projection: { _id: 0, movie_name: 1, genres: 1 } }
             ).toArray();
-        console.log(movies);
-        return res.status(200).json(movies);
+        
+        const moviesWithoutId = movies.map((movieRow) => {return {movie_name: movieRow.movie_name, genres:movieRow.genres}});
+        console.log(moviesWithoutId);
+        return res.status(200).json(moviesWithoutId);
     }
     catch(err)
     {
