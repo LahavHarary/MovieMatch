@@ -1,48 +1,50 @@
 import { Request, Response } from 'express';
 import { connect } from '../database/db';
 
+// Endpoint to get movies according to genre
 export const getMoviesAccordingToGenre = async (req: Request, res: Response) => {
     try {
-        let genre : string = req.params.genre;
+        let genre: string = req.params.genre;
+        
         // Validate genre
         if (!genre) {
             return res.status(400).send('Genre is required');
         }
-        genre = genre.replace(genre.charAt(0),genre.charAt(0).toUpperCase());
-        console.log(genre);
 
-        const db = await connect();
-        const collection = db.collection('movies');
-        const movies = await collection.find(
-            { genres: { $in: [genre] } },
-             ).toArray();
-
-        return res.status(200).json(movies);
-    }
-    catch(err)
-    {
-        console.error('Error fetching movie genres:', err);
-        return res.status(500).send('Error fetching movie genres');
-    }
-}
-
-export const getAllMovies =async (req:Request, res: Response) => {
-    try{
-        const db = await connect();
-        const collection = db.collection('movies');
-        const movies = await collection.find(
-            {},
-            //{ projection: { _id: 0, movie_name: 1, genres: 1 } }
-            ).toArray();
+        // Capitalize the first letter of the genre
+        genre = genre.charAt(0).toUpperCase() + genre.slice(1);
         
-        const moviesWithoutId = movies.map((movieRow) => {return {movie_name: movieRow.movie_name, genres:movieRow.genres}});
-        console.log(moviesWithoutId);
-        return res.status(200).json(moviesWithoutId);
+        // Fetch all movies
+        const movies = await fetchAllMovies();
+        
+        // Filter movies by genre
+        const moviesFiltered = movies.filter(movie => movie.genres.includes(genre));
+        
+        return res.status(200).json(moviesFiltered);
+    } catch (err) {
+        console.error('Error fetching movies by genre:', err);
+        return res.status(500).send('Error fetching movies by genre');
     }
-    catch(err)
-    {
-        console.error('Error fetching movie genres:', err);
-        return res.status(500).send('Error fetching movie genres');
-    }
+};
 
-}
+// Endpoint to get all movies
+export const getAllMovies = async (req: Request, res: Response) => {
+    try {
+        const movies = await fetchAllMovies();
+        return res.status(200).json(movies);
+    } catch (err) {
+        console.error('Error fetching movies:', err);
+        return res.status(500).send('Error fetching movies');
+    }
+};
+
+// Function to fetch all movies from the database
+const fetchAllMovies = async () => {
+    const db = await connect();
+    const collection = db.collection('movies');
+    const movies = await collection.find({}).toArray();
+    return movies.map(movieRow => ({
+        movie_name: movieRow.movie_name,
+        genres: movieRow.genres,
+    }));
+};
