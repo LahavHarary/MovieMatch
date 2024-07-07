@@ -1,4 +1,4 @@
-import { connect } from '../db';
+import { connect, disconnect } from '../db';
 
 async function insertMovieGenres() {
   const db = await connect();
@@ -16,6 +16,7 @@ async function insertMovieGenres() {
     { genre: 'Anime' }
   ]);
   console.log('Movie genres inserted');
+  disconnect();
 }
 
 insertMovieGenres().catch(console.error);
