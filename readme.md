@@ -15,7 +15,8 @@ Make sure you have the following installed:
 Node.js
 npm
 MongoDB
-Installation
+
+## Installation
 Clone the repository:
 
 > git clone https://github.com/yourusername/MovieMatch.git
