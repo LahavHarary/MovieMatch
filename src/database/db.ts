@@ -11,4 +11,8 @@ async function connect() {
   return db;
 }
 
-export { connect };
+function disconnect() {
+  client.close();
+}
+
+export { connect, disconnect };
