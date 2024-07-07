@@ -1,47 +1,58 @@
 # MovieMatch
+
 ## Overview
 MovieMatch is an innovative application designed to help people find a movie that everyone will enjoy. By creating user profiles and swiping left or right on suggested movies, users can easily agree on a movie to watch together based on their preferences.
 
 ## Features
-Create user profiles with movie preferences.
-Swipe left or right on movie suggestions.
-Match movies based on group preferences.
-Getting Started
+- Create user profiles with movie preferences.
+- Swipe left or right on movie suggestions.
+- Match movies based on group preferences.
+
+## Getting Started
+
 These instructions will help you set up and run the project locally on your machine.
 
-## Prerequisites
+### Prerequisites
+
 Make sure you have the following installed:
+- Node.js
+- npm
+- MongoDB
 
-Node.js
-npm
-MongoDB
+### Installation
 
-## Installation
-Clone the repository:
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/yourusername/MovieMatch.git
+    cd MovieMatch
+    ```
 
-> git clone https://github.com/yourusername/MovieMatch.git
-> cd MovieMatch
-> npm install
-> Install MongoDB locally:
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
 
-macOS:
+3. Install MongoDB locally:
 
-> brew tap mongodb/brew
-> brew install mongodb-community@5.0
+    - **macOS:**
+        ```sh
+        brew tap mongodb/brew
+        brew install mongodb-community@5.0
+        ```
 
-Windows:
-Download and install from MongoDB Community Download.
+    - **Windows:**
+        Download and install from [MongoDB Community Download](https://www.mongodb.com/try/download/community).
 
-Linux:
-Follow the instructions on the MongoDB Installation Documentation.
+    - **Linux:**
+        Follow the instructions on the [MongoDB Installation Documentation](https://docs.mongodb.com/manual/installation/).
 
-Start the MongoDB server:
+4. Start the MongoDB server:
+    ```sh
+    mongod
+    ```
 
-> mongod
-Running the Project Locally
-> npx ts-node src/index.ts
+### Running the Project Locally
 
-Usage
-Once the server is running, open your browser and navigate to http://localhost:3000 to start using MovieMatch.
-
-Thank you for using MovieMatch! If you have any questions or feedback, feel free to open an issue on GitHub.
+1. **NPX**
+   ```sh
+   npx ts-node src/index.ts
