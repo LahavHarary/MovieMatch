@@ -1,4 +1,4 @@
-import { connect } from '../db';
+import { connect, disconnect} from '../db';
 
 const collectionName = "movie_genres";
 
@@ -10,7 +10,7 @@ async function cleanCollection() {
     console.log(`Deleted ${result.deletedCount} documents from ${collectionName}`);
 
     console.log(`Collection '${collectionName}' cleaned successfully`);
-    //await client.close();
+    disconnect();
 }
 
 cleanCollection().catch(console.error);
