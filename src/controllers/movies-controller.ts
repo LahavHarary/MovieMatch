@@ -4,21 +4,24 @@ import { connect } from '../database/db';
 // Endpoint to get movies according to genre
 export const getMoviesAccordingToGenre = async (req: Request, res: Response) => {
     try {
-        let genre: string = req.params.genre;
+        let genres: string[] = req.body.movie_genres;
+        console.log("genres - " +genres);
         
         // Validate genre
-        if (!genre) {
+        if (!genres) {
             return res.status(400).send('Genre is required');
         }
 
-        // Capitalize the first letter of the genre
-        genre = genre.charAt(0).toUpperCase() + genre.slice(1);
+        genres.forEach(genre => {
+            // Capitalize the first letter of the genre
+            genre = genre.charAt(0).toUpperCase() + genre.slice(1);    
+        });
         
         // Fetch all movies
         const movies = await fetchAllMovies();
         
         // Filter movies by genre
-        const moviesFiltered = movies.filter(movie => movie.genres.includes(genre));
+        const moviesFiltered = movies.filter(movie => movie.genres.includes(genres));
         
         return res.status(200).json(moviesFiltered);
     } catch (err) {
