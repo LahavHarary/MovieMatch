@@ -4,6 +4,6 @@ import { getMoviesAccordingToGenre, getAllMovies } from '../controllers/movies-c
 const router = Router();
 
 router.get('/movies', getAllMovies);
-router.get('/movies/:genre', getMoviesAccordingToGenre);
+router.get('/moviesAccordingToGenre', getMoviesAccordingToGenre);
 
 export default router;
